@@ -446,6 +446,95 @@
     font-weight: 300;
   }
 
+  /* ===== ROOMIE OF THE MONTH ===== */
+  .rotm {
+    padding: 100px 20px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(201,169,110,0.06) 0%, transparent 60%),
+      var(--dark-warm);
+  }
+
+  .rotm-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .rotm-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), var(--amber));
+    color: var(--dark);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.75em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 30px;
+    margin-bottom: 25px;
+  }
+
+  .rotm h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .rotm-month {
+    color: rgba(245,239,230,0.4);
+    font-weight: 300;
+    font-size: 0.95em;
+    letter-spacing: 0.1em;
+    margin-bottom: 30px;
+  }
+
+  .rotm-image-frame {
+    position: relative;
+    width: 320px;
+    margin: 0 auto 30px auto;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid rgba(201,169,110,0.3);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,169,110,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .rotm-image-frame:hover {
+    border-color: rgba(201,169,110,0.5);
+    transform: scale(1.02);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.6), 0 0 50px rgba(201,169,110,0.15);
+  }
+
+  .rotm-image-frame img {
+    width: 100%;
+    display: block;
+  }
+
+  .rotm-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em;
+    color: var(--cream);
+    margin-bottom: 5px;
+  }
+
+  .rotm-title {
+    color: var(--gold-light);
+    font-weight: 400;
+    font-size: 1em;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .rotm-description {
+    color: rgba(245,239,230,0.6);
+    font-weight: 300;
+    line-height: 1.8;
+    font-size: 1em;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
   /* ===== FOOTER ===== */
   footer {
     text-align: center;
@@ -516,6 +605,7 @@
     <li><a href="#menu">Drinks</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#residents">Residents</a></li>
+    <li><a href="#rotm">🏆 Roomie</a></li>
   </ul>
 </nav>
 
@@ -699,6 +789,27 @@
   </div>
 </section>
 
+
+<!-- ROOMIE OF THE MONTH -->
+<div class="rotm" id="rotm">
+  <div class="rotm-content fade-in">
+    <div class="rotm-badge">🏆 March 2026</div>
+    <h2>Roomie of the Month</h2>
+    <p class="rotm-month">Voted by the residents (the four-legged ones had the deciding vote)</p>
+    <div class="rotm-image-frame">
+      <img src="paws-rotm.jpg" alt="Paws — Roomie of the Month">
+    </div>
+    <div class="rotm-name">Paws</div>
+    <div class="rotm-title">DJ, Weekend Warrior, Professional Couch Occupier</div>
+    <p class="rotm-description">
+      The youngest member of the household brings the beats on weekends
+      and the energy every day. Whether he's spinning decks at a gig or
+      claiming the best spot on the couch before anyone else gets home,
+      Paws keeps the vibes alive at Pluto's. The dogs voted unanimously
+      — mostly because he drops the most food.
+    </p>
+  </div>
+</div>
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">🐾 Pluto's Family Bar</div>

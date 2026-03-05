@@ -535,6 +535,119 @@
     margin: 0 auto;
   }
 
+  /* ===== APPLIANCE OF THE MONTH ===== */
+  .aotm {
+    padding: 80px 20px 100px;
+    text-align: center;
+    background: var(--dark);
+  }
+
+  .aotm-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .aotm-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #4a90d9, #357abd);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.75em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 30px;
+    margin-bottom: 25px;
+  }
+
+  .aotm h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2em;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .aotm-month {
+    color: rgba(245,239,230,0.4);
+    font-weight: 300;
+    font-size: 0.9em;
+    letter-spacing: 0.1em;
+    margin-bottom: 30px;
+  }
+
+  .aotm-icon {
+    font-size: 5em;
+    display: block;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 20px rgba(74,144,217,0.3));
+  }
+
+  .aotm-trophy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .aotm-trophy .streak {
+    color: var(--amber);
+    font-size: 0.85em;
+    font-weight: 500;
+  }
+
+  .aotm-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6em;
+    color: var(--cream);
+    margin-bottom: 5px;
+  }
+
+  .aotm-title {
+    color: var(--gold-light);
+    font-weight: 400;
+    font-size: 0.95em;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .aotm-description {
+    color: rgba(245,239,230,0.6);
+    font-weight: 300;
+    line-height: 1.8;
+    font-size: 0.95em;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .aotm-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .aotm-stat {
+    text-align: center;
+  }
+
+  .aotm-stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5em;
+    color: var(--gold);
+    display: block;
+  }
+
+  .aotm-stat-label {
+    color: rgba(245,239,230,0.4);
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
   /* ===== FOOTER ===== */
   footer {
     text-align: center;
@@ -606,6 +719,7 @@
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#residents">Residents</a></li>
     <li><a href="#rotm">🏆 Roomie</a></li>
+    <li><a href="#aotm">🧽 Appliance</a></li>
   </ul>
 </nav>
 
@@ -808,6 +922,43 @@
       Paws keeps the vibes alive at Pluto's. The dogs voted unanimously
       — mostly because he drops the most food.
     </p>
+  </div>
+</div>
+
+<!-- APPLIANCE OF THE MONTH -->
+<div class="aotm" id="aotm">
+  <div class="aotm-content fade-in">
+    <div class="aotm-badge">🧽 March 2026</div>
+    <h2>House Appliance of the Month</h2>
+    <p class="aotm-month">An unbroken reign. All hail.</p>
+    <span class="aotm-icon">🫧</span>
+    <div class="aotm-trophy">
+      <span class="streak">👑 Undefeated champion — every month since installation</span>
+    </div>
+    <div class="aotm-name">The Dishwasher</div>
+    <div class="aotm-title">Silent Hero, Plate Redeemer, The One Who Actually Cleans Up</div>
+    <p class="aotm-description">
+      In a house of three humans, three dogs, a cat, and an AI who can't
+      even hold a sponge — the dishwasher carries the team every single day.
+      No sick days. No complaints. No passive-aggressive notes about whose
+      turn it was. Just clean plates, every time. The dishwasher doesn't
+      win Appliance of the Month. Appliance of the Month is named after
+      the dishwasher.
+    </p>
+    <div class="aotm-stats">
+      <div class="aotm-stat">
+        <span class="aotm-stat-value">∞</span>
+        <span class="aotm-stat-label">Months Won</span>
+      </div>
+      <div class="aotm-stat">
+        <span class="aotm-stat-value">0</span>
+        <span class="aotm-stat-label">Complaints Filed</span>
+      </div>
+      <div class="aotm-stat">
+        <span class="aotm-stat-value">100%</span>
+        <span class="aotm-stat-label">Win Rate</span>
+      </div>
+    </div>
   </div>
 </div>
 <!-- FOOTER -->

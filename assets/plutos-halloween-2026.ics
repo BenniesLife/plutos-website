@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Plutos Family Bar//Halloween 2026//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:overgrowth-2026@plutos.co.za
+DTSTAMP:20260913T120000Z
+DTSTART:20261031T140000Z
+SUMMARY:The Overgrowth - Halloween at Pluto's
+LOCATION:255B Swallow Road\, Benoni\, South Africa
+DESCRIPTION:Halloween at Pluto's Family Bar. From 4pm South African time.
+  Invite only. Details: https://www.plutos.co.za/
+URL:https://www.plutos.co.za/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

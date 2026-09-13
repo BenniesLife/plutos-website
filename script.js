@@ -49,7 +49,7 @@ if (toggle && navigation) {
     if (!event.target.closest(".site-header")) closeMenu();
   });
   window
-    .matchMedia("(min-width: 761px)")
+    .matchMedia("(min-width: 961px)")
     .addEventListener("change", () => closeMenu());
 }
 

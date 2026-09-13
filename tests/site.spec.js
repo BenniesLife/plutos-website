@@ -109,6 +109,25 @@ test("layouts fit narrow phones, tablets and desktop screens", async ({
     const heading = await page.locator("h1").boundingBox();
     expect(heading.x).toBeGreaterThanOrEqual(0);
     expect(heading.x + heading.width).toBeLessThanOrEqual(width);
+    if (width <= 390) {
+      const poster = await page.locator(".invitation-poster").boundingBox();
+      const header = await page.locator(".site-header").boundingBox();
+      expect(poster.y).toBeGreaterThanOrEqual(header.y + header.height);
+      expect(poster.y - (header.y + header.height)).toBeLessThan(24);
+      for (const action of await page.locator(".invite-actions a").all()) {
+        const box = await action.boundingBox();
+        expect(box.height).toBeGreaterThanOrEqual(44);
+        expect(box.y + box.height).toBeLessThanOrEqual(900);
+      }
+      const motion = await page.locator(".motion-toggle").boundingBox();
+      expect(motion.y + motion.height).toBeLessThanOrEqual(
+        header.y + header.height,
+      );
+      await expect(page.locator(".invitation-poster img")).toHaveAttribute(
+        "fetchpriority",
+        "high",
+      );
+    }
   }
 });
 
@@ -288,7 +307,7 @@ test("data saver and failed playback retain a usable still background", async ({
     "./assets/greenhouse-night.webp",
   );
   await expect(
-    page.getByRole("link", { name: "Enter the overgrowth" }),
+    page.getByRole("link", { name: "Get directions" }),
   ).toBeVisible();
 });
 

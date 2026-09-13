@@ -6,7 +6,7 @@
   "scripts": {
     "preview": "python3 -m http.server 4173",
     "test": "playwright test",
-    "format:check": "prettier --check index.html styles.css script.js playwright.config.js tests scripts .github/workflows README.md package.json",
+    "format:check": "prettier --check index.html styles.css script.js atmosphere.js playwright.config.js tests scripts .github/workflows README.md package.json",
     "stage": "node scripts/stage.mjs"
   },
   "devDependencies": {

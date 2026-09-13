@@ -8,6 +8,7 @@ for (const file of [
   "index.html",
   "styles.css",
   "script.js",
+  "atmosphere.js",
   "assets",
   "CNAME",
   ".nojekyll",

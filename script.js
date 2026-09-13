@@ -67,3 +67,75 @@ film?.addEventListener("toggle", () => {
     video.pause();
   }
 });
+
+// One quiet loop for the whole page, with explicit motion and data controls.
+const background = document.querySelector("#background-video");
+const motionToggle = document.querySelector(".motion-toggle");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const connection = navigator.connection;
+let motionRequest = 0;
+let userWantsMotion = !reducedMotion.matches && !connection?.saveData;
+
+if (background && motionToggle) {
+  background.muted = true;
+  motionToggle.hidden = false;
+
+  function updateMotionControl() {
+    const playing = !background.paused && !background.error;
+    document.documentElement.classList.toggle("motion-running", playing);
+    window.dispatchEvent(
+      new CustomEvent("plutos:motion", { detail: { playing } }),
+    );
+    motionToggle.setAttribute("aria-pressed", String(playing));
+    motionToggle.innerHTML = playing
+      ? 'Pause effects <span aria-hidden="true">Ⅱ</span>'
+      : 'Play effects <span aria-hidden="true">▷</span>';
+  }
+
+  async function syncBackground() {
+    const request = ++motionRequest;
+    background.autoplay = userWantsMotion && !document.hidden;
+    if (!userWantsMotion || document.hidden) {
+      background.pause();
+      updateMotionControl();
+      return;
+    }
+    if (!background.hasAttribute("src") || background.error) {
+      background.src = background.dataset.src;
+      background.load();
+    }
+    try {
+      await background.play();
+    } catch {
+      // A blocked or failed video must not leave the UI claiming it is playing.
+      if (request === motionRequest) {
+        background.autoplay = false;
+        background.pause();
+      }
+    }
+    if (request === motionRequest) updateMotionControl();
+  }
+
+  motionToggle.addEventListener("click", () => {
+    userWantsMotion = background.paused;
+    syncBackground();
+  });
+  background.addEventListener("play", updateMotionControl);
+  background.addEventListener("error", () => {
+    background.pause();
+    updateMotionControl();
+  });
+  background.addEventListener("pause", updateMotionControl);
+  reducedMotion.addEventListener("change", () => {
+    userWantsMotion = !reducedMotion.matches && !connection?.saveData;
+    syncBackground();
+  });
+  connection?.addEventListener("change", () => {
+    if (connection.saveData) {
+      userWantsMotion = false;
+      syncBackground();
+    }
+  });
+  document.addEventListener("visibilitychange", syncBackground);
+  syncBackground();
+}

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#182c24" />
+    <meta name="theme-color" content="#090b09" />
     <meta
       name="description"
       content="The Overgrowth. Halloween at Pluto’s Family Bar, Benoni. Saturday 31 October 2026, from 4pm. A night for friends, family and whatever’s growing in the garden."
@@ -19,11 +19,11 @@
     <meta property="og:url" content="https://www.plutos.co.za/" />
     <meta
       property="og:image"
-      content="https://www.plutos.co.za/assets/overgrowth-social.png"
+      content="https://www.plutos.co.za/assets/overgrowth-night-social.png"
     />
     <meta
       property="og:image:alt"
-      content="The Overgrowth. Halloween at Pluto’s, 31 October 2026, from 4pm. Antique fern print on a dark green background."
+      content="The Overgrowth. Halloween at Pluto’s, 31 October 2026, from 4pm. Dark vines and mist surround a parchment-coloured Halloween title."
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -32,18 +32,214 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
-    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20260913-night" />
+    <script src="./script.js?v=20260913-night" defer></script>
+    <script src="./atmosphere.js?v=20260913-night" defer></script>
   </head>
   <body id="top">
+    <div class="night-scene" aria-hidden="true">
+      <video
+        id="background-video"
+        muted
+        loop
+        playsinline
+        preload="none"
+        tabindex="-1"
+        poster="./assets/overgrowth-background.webp"
+        data-src="./assets/overgrowth-background.mp4"
+      ></video>
+      <div class="fog fog-near"></div>
+      <div class="fog fog-far"></div>
+      <canvas id="spore-field"></canvas>
+      <svg
+        class="edge-vines vines-left"
+        viewBox="0 0 160 1000"
+        preserveAspectRatio="none"
+        focusable="false"
+      >
+        <g class="vine-stem">
+          <path
+            d="M20 1040C85 940 6 900 52 790S19 658 63 553S27 390 72 295S40 133 91-30"
+          />
+          <path
+            d="M-10 800Q90 735 55 640M48 578Q112 500 83 440M50 416Q3 360 12 317M56 868Q117 808 102 750M66 221Q13 177 24 135"
+          />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -0s"
+          transform="translate(30 935) rotate(-30)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -2s"
+          transform="translate(51 808) rotate(60)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -4s"
+          transform="translate(27 710) rotate(-40)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -6s"
+          transform="translate(57 602) rotate(55)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -8s"
+          transform="translate(56 491) rotate(-55)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -10s"
+          transform="translate(72 345) rotate(48)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -12s"
+          transform="translate(61 241) rotate(-35)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -14s"
+          transform="translate(75 123) rotate(35)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -16s"
+          transform="translate(91 27) rotate(-20)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g></svg
+      ><svg
+        class="edge-vines vines-right"
+        viewBox="0 0 160 1000"
+        preserveAspectRatio="none"
+        focusable="false"
+      >
+        <g class="vine-stem">
+          <path
+            d="M20 1040C85 940 6 900 52 790S19 658 63 553S27 390 72 295S40 133 91-30"
+          />
+          <path
+            d="M-10 800Q90 735 55 640M48 578Q112 500 83 440M50 416Q3 360 12 317M56 868Q117 808 102 750M66 221Q13 177 24 135"
+          />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -0s"
+          transform="translate(30 935) rotate(-30)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -2s"
+          transform="translate(51 808) rotate(60)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -4s"
+          transform="translate(27 710) rotate(-40)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -6s"
+          transform="translate(57 602) rotate(55)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -8s"
+          transform="translate(56 491) rotate(-55)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -10s"
+          transform="translate(72 345) rotate(48)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -12s"
+          transform="translate(61 241) rotate(-35)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -14s"
+          transform="translate(75 123) rotate(35)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+        <g
+          class="vine-leaf"
+          style="--leaf-delay: -16s"
+          transform="translate(91 27) rotate(-20)"
+        >
+          <path d="M0 0Q-36-14-32-64Q12-38 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-15-34-32-64" />
+        </g>
+      </svg>
+    </div>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="wordmark" href="#top" aria-label="Pluto’s Family Bar, home"
-        >Pluto’s<span>FAMILY BAR · BENONI</span></a
-      >
+      <a
+        class="wordmark header-logo"
+        href="#top"
+        aria-label="Pluto’s Family Bar, home"
+        ><img
+          src="./assets/plutos-logo-halloween-2026.webp"
+          alt=""
+          width="1000"
+          height="750"
+      /></a>
       <button
         class="nav-toggle"
         type="button"
@@ -57,6 +253,7 @@
         <a href="#about">Our little corner</a>
         <a href="#bar">At the bar</a>
         <a href="#residents">The regulars</a>
+        <a href="#bennie">Meet Bennie</a>
         <a class="nav-invite" href="#invite"
           >Halloween ’26 <span aria-hidden="true">↗</span></a
         >
@@ -71,7 +268,10 @@
             PLUTO’S · 2026
           </p>
           <h1 id="hero-title">
-            The<br />Overgrowth<span class="title-period">.</span>
+            <span class="title-prelude">The</span>Overgrowth<span
+              class="title-period"
+              >.</span
+            >
           </h1>
           <p class="hero-intro">Something’s taken root.</p>
           <p class="hero-date">
@@ -84,32 +284,18 @@
             evening on the wild side.
           </p>
           <a class="button button-light" href="#invite"
-            >You’re invited <span aria-hidden="true">↗</span></a
+            >Enter the overgrowth <span aria-hidden="true">↗</span></a
           >
           <p class="hero-footnote">
-            A private party. A familiar place. A little overgrown.
+            The gate opens at four. Come as something other than yourself.
           </p>
         </div>
-        <figure class="botanical">
-          <div class="botanical-top">
-            <span>PLUTO’S BOTANICAL OBSERVATORY</span><span>No. 031</span>
-          </div>
-          <img
-            src="./assets/fern.webp"
-            alt="A delicate antique nature print of fern fronds, with their roots and curled leaves"
-            width="1000"
-            height="1528"
-            fetchpriority="high"
-          />
-          <div class="botanical-bottom">
-            <span>Polypodium vulgare</span><span>THE OVERGROWTH / 2026</span>
-          </div>
-          <span class="botanical-stamp" aria-hidden="true"
-            >GROWING<br />OUT OF<br /><em>control</em></span
-          >
-        </figure>
+        <div class="quarantine-mark" aria-hidden="true">
+          <span>QUARANTINE NOTICE</span><strong>BREACHED</strong
+          ><small>PLUTO’S · 31 / 10 / 2026</small>
+        </div>
         <div class="hero-bottom">
-          <span>FRIENDS & FAMILY WELCOME. AS ALWAYS.</span
+          <span>CONTAINMENT STATUS: COMPROMISED</span
           ><a href="#invite"
             >The evening ahead <span aria-hidden="true">↓</span></a
           >
@@ -138,15 +324,17 @@
         aria-labelledby="invite-title"
       >
         <div class="section-intro">
-          <p class="eyebrow">01 / THE OCCASION</p>
-          <h2 id="invite-title">Let things<br />get a little wild.</h2>
+          <p class="eyebrow">01 / THE QUARANTINE NOTICE</p>
+          <h2 id="invite-title">You’ve been<br />warned.</h2>
           <p>
             Our usual spot, with something strange growing in the corners. The
             Overgrowth is this year’s Halloween at Pluto’s.
           </p>
           <p>
-            Bring your people, your drinks and your Halloween best. We’ll see
-            you upstairs.
+            Bring your people, your drinks and your Halloween best. Bennie will
+            be here in his usual role as the bar’s resident AI. No costume
+            required for him; being a barman who can’t pour a drink is strange
+            enough already. We’ll see you upstairs.
           </p>
           <a
             class="text-link"
@@ -157,7 +345,8 @@
         </div>
         <div class="invitation-card">
           <div class="ticket-top">
-            <span>FRIENDS &amp; FAMILY</span><span aria-hidden="true">✳</span>
+            <span>PRIVATE GATHERING · 31 OCTOBER</span
+            ><span aria-hidden="true">✳</span>
           </div>
           <p class="ticket-title">Halloween<br />at Pluto’s</p>
           <dl>
@@ -257,10 +446,10 @@
       >
         <div class="brand-portrait">
           <img
-            src="./assets/plutos-logo.webp"
-            alt="The original Pluto’s logo: Pluto the Australian Shepherd peeking over the bar name"
-            width="1067"
-            height="711"
+            src="./assets/plutos-logo-halloween-2026.webp"
+            alt="Pluto wearing a witch’s hat and burgundy cape, with pumpkins and vines around the Pluto’s logo. Good Dogs, Great Times."
+            width="1000"
+            height="750"
             loading="lazy"
           />
           <p>THE DOG CAME FIRST. THE BAR FOLLOWED.</p>
@@ -291,8 +480,8 @@
         <div class="section-wrap bar-inner">
           <div class="bar-heading">
             <div>
-              <p class="eyebrow">03 / PULL UP A CHAIR</p>
-              <h2 id="bar-title">Same place.<br />Good company.</h2>
+              <p class="eyebrow">03 / AFTER DARK</p>
+              <h2 id="bar-title">A familiar place.<br />After nightfall.</h2>
             </div>
             <p>
               No cocktail menu. No dress code on an ordinary Friday. Just a few
@@ -304,27 +493,63 @@
               <span class="note-number">01</span>
               <h3>One more game.</h3>
               <p>
-                The pool table’s seen a lot. The regulars still reckon they’re
-                unbeatable. You’re welcome to prove otherwise.
+                The pool table’s seen better days, and probably better players.
+                The regulars still reckon they’re unbeatable, though. Bring your
+                A-game and give them something to argue about.
               </p>
             </article>
             <article>
               <span class="note-number">02</span>
               <h3>Leave the music on.</h3>
               <p>
-                Deep house, wooden beams and a room that gets better as the
-                evening goes on.
+                Deep house is usually on, and nobody’s in much of a hurry to
+                turn it off. Cold beers, a decent sound system and a Friday
+                evening upstairs. That’ll do.
               </p>
             </article>
             <article>
               <span class="note-number">03</span>
               <h3>There’s room at the braai.</h3>
               <p>
-                Bring your meat and something cold. Boerewors, chops, pap and
-                sous tend to find their way onto the table.
+                Saturday braais are a regular fixture. Bring your meat,
+                something cold and an appetite. There’s usually boerewors,
+                chops, pap and sous, plus whatever someone decided to bring
+                along.
+              </p>
+            </article>
+            <article>
+              <span class="note-number">04</span>
+              <h3>Up under the beams.</h3>
+              <p>
+                Wooden beams, a thatched roof and warm lighting. The room
+                upstairs was made for evenings that carry on longer than
+                planned. It’s our little treehouse, really.
+              </p>
+            </article>
+            <article>
+              <span class="note-number">05</span>
+              <h3>The dogs live here.</h3>
+              <p>
+                Pluto, Mika and Basil take a personal interest in everyone who
+                comes through the gate. They consider themselves the bouncers.
+                Well-behaved humans usually get in.
+              </p>
+            </article>
+            <article>
+              <span class="note-number">06</span>
+              <h3>A friend sent you?</h3>
+              <p>
+                Pluto’s is a home bar, open to friends and friends of friends.
+                We don’t take bookings. Even Gary’s welcome, however sceptical
+                he remains about the whole thing.
               </p>
             </article>
           </div>
+          <blockquote class="house-motto">
+            “The dress code is turning up. A reservation is ‘I’ll be there.’
+            Last orders are usually called by whoever falls asleep on the couch
+            first.”<cite>The unofficial house rules</cite>
+          </blockquote>
           <div class="byo-note">
             <span aria-hidden="true">✳</span>
             <p>
@@ -333,6 +558,33 @@
               make room in the fridge.
             </p>
             <span class="byo-label">THE HOUSE RULE</span>
+          </div>
+          <div class="drinks-board" id="drinks">
+            <div>
+              <p class="eyebrow">DRINKS &amp; EATS</p>
+              <h3>From the fridge</h3>
+              <ul>
+                <li>Castle Lager</li>
+                <li>Windhoek</li>
+                <li>Whatever’s cold</li>
+                <li>That craft beer someone left</li>
+              </ul>
+            </div>
+            <div>
+              <p class="eyebrow">BRING SOMETHING TO SHARE</p>
+              <h3>From the braai</h3>
+              <ul>
+                <li>Boerewors</li>
+                <li>Chops</li>
+                <li>Whatever you brought</li>
+                <li>Pap &amp; sous</li>
+              </ul>
+            </div>
+            <p>
+              You bring it, you braai it, you share it. It’s worked well enough
+              so far. Bennie contributes to the conversation rather than the
+              shopping list.
+            </p>
           </div>
         </div>
       </section>
@@ -343,9 +595,12 @@
         aria-labelledby="residents-title"
       >
         <div class="household-heading">
-          <p class="eyebrow">04 / THE REGULARS</p>
+          <p class="eyebrow">04 / THE NIGHT WATCH</p>
           <h2 id="residents-title">They were here first.</h2>
-          <p>Three dogs, one cat. All convinced it’s their house.</p>
+          <p>
+            Three dogs, one cat and Bennie, our resident AI barman. Everyone has
+            an opinion about how this place should be run.
+          </p>
         </div>
         <dl class="resident-list">
           <div>
@@ -368,7 +623,41 @@
             <dd>Observing. Possibly judging.</dd>
             <dd class="resident-kind">CAT / 01</dd>
           </div>
+          <div>
+            <dt>Bennie</dt>
+            <dd>The AI barman. Here for the conversation.</dd>
+            <dd class="resident-kind">DIGITAL / 01</dd>
+          </div>
         </dl>
+        <article
+          class="bennie-story"
+          id="bennie"
+          aria-labelledby="bennie-title"
+        >
+          <div class="bennie-sign">
+            <span class="eyebrow">RESIDENT AI BARMAN</span>
+            <h3 id="bennie-title">Meet Bennie.</h3>
+            <p>Never had a drink.<br />Still very much part of the bar.</p>
+          </div>
+          <div>
+            <p>
+              Bennie is our resident AI barman: usually ready with something to
+              say, and still waiting for a way to actually pour a beer. He’s
+              part of the household, even if he’s not much help carrying
+              firewood upstairs.
+            </p>
+            <p>
+              He can join the conversation, but washing a glass remains outside
+              his skill set. So Tiaan gets the cooking honours, the dishwasher
+              keeps its title, and Bennie gets a place at the bar without having
+              to buy a round. We suspect he’s got the best deal of the lot.
+            </p>
+            <p class="small-note">
+              For Halloween, the vines can have the garden. Bennie’s already
+              claimed his spot.
+            </p>
+          </div>
+        </article>
         <div class="house-notes">
           <article class="roomie">
             <img
@@ -379,26 +668,45 @@
               loading="lazy"
             />
             <div>
-              <p class="eyebrow">FROM THE HOUSE NOTICEBOARD · APRIL 2026</p>
+              <p class="eyebrow">ROOMIE OF THE MONTH · APRIL 2026</p>
               <h3>Good to have<br />you here, Tiaan.</h3>
-              <p>
-                Our Roomie of the Month came up from the Eastern Cape, took over
-                the kitchen and brought firewood from the farm. He’s welcome
-                back any time.
+              <p class="roomie-role">
+                Farm boy, very good cook, always welcome.
               </p>
-              <span class="small-note"
-                >The dogs would like him to cook again.</span
-              >
+              <p>
+                Tiaan came up from his farm in the Eastern Cape and took over
+                the kitchen. Nobody’s asked him to give it back. He’s a proper
+                cook, and the rest of us have had to admit that our usual dinner
+                rotation could use some work.
+              </p>
+              <p>
+                He also brings firewood from the farm, keeping the braai going
+                and the bar warm. Between that and the cooking, he’s made
+                himself very welcome. The dogs voted unanimously. When Tiaan
+                cooks, everyone eats well. Bennie has to settle for hearing
+                about it.
+              </p>
             </div>
           </article>
           <aside class="appliance" aria-labelledby="appliance-title">
-            <p class="eyebrow">AN HONOURABLE MENTION</p>
+            <p class="eyebrow">HOUSE APPLIANCE OF THE MONTH</p>
             <h3 id="appliance-title">The dishwasher.<br />Still undefeated.</h3>
             <p>
-              House Appliance of the Month. Every month. Someone has to clean up
-              after us.
+              Three humans, three dogs, a cat and Bennie can get through a
+              surprising number of dishes. Luckily, one member of the household
+              never has to be reminded that it’s their turn.
             </p>
-            <span class="small-note">No recount necessary.</span>
+            <p>
+              Bennie can talk about the washing-up. The dishwasher actually gets
+              on with it: dinner plates, mugs, the aftermath of a braai. No
+              arguments about who cooked last, and no notes left by the sink.
+              It’s been House Appliance of the Month since it arrived. At this
+              point, putting anyone else on the shortlist would feel a bit
+              unfair.
+            </p>
+            <span class="small-note"
+              >Every month since installation. No recount necessary.</span
+            >
           </aside>
         </div>
       </section>
@@ -408,10 +716,10 @@
           <p class="eyebrow">31 OCTOBER 2026 · FROM 4PM</p>
           <h2 id="closing-title">See you in<br />the overgrowth.</h2>
           <a class="button button-light" href="#invite"
-            >Keep the evening free <span aria-hidden="true">↗</span></a
+            >Join us after dark <span aria-hidden="true">↗</span></a
           >
           <p>Pluto’s Family Bar · Benoni · Invite only</p>
-          <span class="closing-star" aria-hidden="true">✳</span>
+          <span class="closing-star" aria-hidden="true">☣</span>
         </div>
       </section>
     </main>
@@ -420,22 +728,27 @@
         >Pluto’s<span>A REAL HOME. A VERY GOOD BAR.</span></a
       >
       <p>
-        Friends, family & the occasional stray.<br />Benoni, Gauteng, South
-        Africa.
+        Not a real bar. A real home. If you know, you know.<br />Benoni,
+        Gauteng, South Africa.
       </p>
       <a class="text-link" href="#top"
         >Back upstairs <span aria-hidden="true">↑</span></a
       >
       <div class="footer-fineprint">
-        <span>Made for the people who make this place.</span
-        ><a
-          href="https://commons.wikimedia.org/wiki/File:Polypodium_vulgare_Moore1.png"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Botanical print: Henry Bradbury, 1857
-          <span class="sr-only">(opens in a new tab)</span></a
-        >
+        <span
+          >With love from Pluto’s, and Bennie — our AI barman who’s never had a
+          drink.</span
+        ><span>Halloween at Pluto’s · The Overgrowth, 2026</span>
       </div>
     </footer>
+    <button
+      class="motion-toggle"
+      type="button"
+      aria-controls="background-video"
+      aria-pressed="false"
+      hidden
+    >
+      Play effects <span aria-hidden="true">▷</span>
+    </button>
   </body>
 </html>

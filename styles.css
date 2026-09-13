@@ -1,14 +1,14 @@
 :root {
-  --forest: #182c24;
-  --forest-deep: #12221b;
-  --cream: #f3efe4;
-  --paper: #e9e5d8;
-  --ink: #263c30;
-  --muted: #62695c;
-  --rust: #a94c31;
-  --line: #cccdbd;
-  --light-line: #526154;
-  --display: "Italiana", Georgia, serif;
+  --forest: #0b0e0b;
+  --forest-deep: #070908;
+  --cream: #e8ddc5;
+  --paper: #151811;
+  --ink: #e8ddc5;
+  --muted: #b5b19f;
+  --rust: #bd7664;
+  --line: #474537;
+  --light-line: #474b3b;
+  --display: "Cormorant Garamond", Georgia, serif;
   --sans: "DM Sans", Arial, sans-serif;
 }
 * {
@@ -20,8 +20,9 @@ html {
 }
 body {
   margin: 0;
-  background: var(--cream);
+  background: var(--forest-deep);
   color: var(--ink);
+  isolation: isolate;
   font: 16px/1.65 var(--sans);
   -webkit-font-smoothing: antialiased;
 }
@@ -193,12 +194,15 @@ h3 {
   margin-left: 12px;
 }
 .hero {
-  display: grid;
-  grid-template-columns: 1.35fr 0.85fr;
-  gap: 0 70px;
-  background: var(--forest);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 760px;
+  padding: 75px max(28px, calc((100vw - 1240px) / 2)) 0;
   color: var(--cream);
-  padding: 65px max(56px, calc((100vw - 1240px) / 2)) 0;
+  background: transparent;
+  position: relative;
+  text-align: center;
 }
 .hero-copy {
   padding-top: 14px;
@@ -217,11 +221,11 @@ h3 {
   line-height: 1;
 }
 .hero h1 {
-  font: 400 clamp(76px, 8.5vw, 122px)/0.94 var(--display);
-  letter-spacing: -4px;
-  margin: 35px -70px 26px 0;
-  position: relative;
-  z-index: 2;
+  font: 600 clamp(64px, 10.8vw, 160px)/0.95 var(--display);
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  margin: 24px 0;
+  text-shadow: 0 4px 35px #000;
 }
 .title-period {
   color: #b5c699;
@@ -243,76 +247,6 @@ h3 {
   font-size: 10px;
   color: #b4bfab;
   margin-top: 17px;
-}
-.botanical {
-  position: relative;
-  align-self: start;
-  background: #e3e1ce;
-  color: var(--ink);
-  margin: 0 4px 0 0;
-  padding: 20px 22px 16px;
-  transform: rotate(2deg);
-  box-shadow: 10px 12px 0 #102219;
-}
-.botanical-top,
-.botanical-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  font-size: 7px;
-  letter-spacing: 1px;
-}
-.botanical-top {
-  border-bottom: 1px solid #a9b09b;
-  padding-bottom: 10px;
-}
-.botanical img {
-  width: 100%;
-  height: 428px;
-  object-fit: cover;
-  object-position: 50% 43%;
-  mix-blend-mode: multiply;
-  margin: 12px 0;
-  filter: saturate(0.65);
-}
-.botanical-bottom {
-  border-top: 1px solid #a9b09b;
-  padding-top: 10px;
-  font-size: 6px;
-}
-.botanical-bottom > span:first-child {
-  font:
-    italic 13px Georgia,
-    serif;
-  letter-spacing: 0;
-}
-.botanical-stamp {
-  position: absolute;
-  right: -24px;
-  bottom: 76px;
-  width: 112px;
-  height: 112px;
-  border: 1px solid #a95035;
-  outline: 1px solid #a95035;
-  outline-offset: -7px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #90472e;
-  background: #e3e1cef2;
-  font-size: 9px;
-  letter-spacing: 2px;
-  line-height: 1.7;
-  transform: rotate(-14deg);
-}
-.botanical-stamp em {
-  font:
-    italic 25px Georgia,
-    serif;
-  letter-spacing: 0;
 }
 .hero-bottom {
   grid-column: 1/-1;
@@ -339,7 +273,8 @@ h3 {
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  background: var(--rust);
+  background: #291311eb;
+  border-block: 1px solid #653629;
   color: var(--cream);
   padding: 26px max(56px, calc((100vw - 1240px) / 2));
 }
@@ -410,7 +345,7 @@ h3 {
 .invitation-card {
   padding: 28px 36px 0;
   background: var(--paper);
-  border: 1px solid #c7cab9;
+  border: 1px solid var(--line);
   position: relative;
 }
 .invitation-card::before,
@@ -419,8 +354,8 @@ h3 {
   content: "";
   width: 18px;
   height: 18px;
-  background: var(--cream);
-  border: 1px solid #c7cab9;
+  background: var(--forest);
+  border: 1px solid var(--line);
   border-radius: 50%;
   bottom: 47px;
 }
@@ -454,7 +389,7 @@ h3 {
   display: grid;
   grid-template-columns: 90px 1fr;
   gap: 15px;
-  border-top: 1px solid #c7cab9;
+  border-top: 1px solid var(--line);
   padding: 12px 0;
 }
 .invitation-card dt {
@@ -551,7 +486,8 @@ h3 {
   padding-bottom: 100px;
 }
 .brand-portrait {
-  background: #e7e5da;
+  background: #11150eeb;
+  border: 1px solid var(--line);
   min-height: 390px;
   display: flex;
   flex-direction: column;
@@ -561,7 +497,9 @@ h3 {
 }
 .brand-portrait img {
   width: 100%;
-  mix-blend-mode: multiply;
+  filter: invert(1);
+  mix-blend-mode: screen;
+  opacity: 0.8;
   max-width: 320px;
 }
 .brand-portrait p {
@@ -831,9 +769,6 @@ h3 {
   .hero h1 {
     font-size: 132px;
   }
-  .botanical img {
-    height: 455px;
-  }
 }
 @media (max-width: 1100px) {
   .section-wrap {
@@ -852,22 +787,6 @@ h3 {
   }
   .hero h1 {
     font-size: 9.4vw;
-  }
-  .botanical {
-    padding: 16px;
-  }
-  .botanical img {
-    height: 400px;
-  }
-  .botanical-top {
-    font-size: 6px;
-    letter-spacing: 0.6px;
-  }
-  .botanical-stamp {
-    right: -14px;
-    width: 94px;
-    height: 94px;
-    font-size: 8px;
   }
   .date-strip {
     padding-inline: 36px;
@@ -984,28 +903,6 @@ h3 {
   }
   .hero-footnote {
     font-size: 9px;
-  }
-  .botanical {
-    width: calc(100% - 26px);
-    max-width: 410px;
-    justify-self: center;
-    margin-top: 5px;
-    transform: rotate(1.5deg);
-    padding: 17px 20px;
-  }
-  .botanical img {
-    height: 330px;
-    object-position: 50% 39%;
-  }
-  .botanical-top {
-    font-size: 7px;
-  }
-  .botanical-bottom {
-    font-size: 6px;
-  }
-  .botanical-stamp {
-    right: -13px;
-    bottom: 55px;
   }
   .hero-bottom {
     margin-top: 6px;
@@ -1289,9 +1186,6 @@ h3 {
     height: 290px;
     object-position: 50% 25%;
   }
-  .botanical-top {
-    font-size: 6px;
-  }
   .date-strip strong {
     font-size: 13px;
   }
@@ -1365,5 +1259,337 @@ h3 {
 @media (prefers-reduced-motion: no-preference) {
   html.js {
     scroll-behavior: smooth;
+  }
+}
+
+/* The invitation film supplies the landscape and palette for the whole site. */
+.night-scene {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: #080b08 url("./assets/overgrowth-background.webp") center / cover;
+}
+.night-scene video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.65);
+}
+.night-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse at 50% 42%,
+      #05080599 0%,
+      #05080566 45%,
+      #030503b8 100%
+    ),
+    linear-gradient(#050705d9, transparent 35%, #03050380);
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.055;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.65' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+}
+.site-header {
+  background: #080b08dd;
+  border-bottom-color: #82745245;
+}
+.hero {
+  padding: 64px max(28px, calc((100vw - 1240px) / 2)) 0;
+  min-height: 740px;
+}
+.hero-copy {
+  width: 100%;
+  padding-top: 10px;
+}
+.hero .eyebrow {
+  justify-content: center;
+  color: #d0baa0;
+  letter-spacing: 3px;
+}
+.hero .small-star {
+  color: #ce8e76;
+}
+.title-prelude {
+  display: block;
+  font-size: 0.35em;
+  line-height: 1.4;
+  letter-spacing: 0.2em;
+  font-weight: 400;
+}
+.title-period {
+  color: #b56b53;
+}
+.hero-intro {
+  font-size: 34px;
+  font-style: italic;
+  color: #d8c9ac;
+}
+.hero-date {
+  justify-content: center;
+  color: #e1d6c2;
+  font-size: 13px;
+}
+.hero-description {
+  color: #d0c8b6;
+  text-shadow: 0 2px 10px #000;
+}
+.hero-footnote {
+  color: #c2b8a4;
+}
+.hero-bottom {
+  width: 100%;
+  margin-top: auto;
+  padding: 23px 0;
+  color: #c0b59e;
+  position: relative;
+}
+.quarantine-mark {
+  color: #c88169;
+  border: 2px solid #9c5c48;
+  outline: 1px solid #9c5c48;
+  outline-offset: -7px;
+  padding: 15px 22px;
+  transform: rotate(-8deg);
+  display: grid;
+  text-align: center;
+  position: absolute;
+  right: 7%;
+  bottom: 105px;
+  opacity: 0.9;
+  background: #140d0b70;
+}
+.quarantine-mark span,
+.quarantine-mark small {
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+.quarantine-mark strong {
+  font: 600 30px/1.35 var(--display);
+  letter-spacing: 2px;
+}
+.button-light {
+  background: #7e2c23;
+  border-color: #a85b43;
+  color: #fff0d5;
+  box-shadow: 0 5px 35px #0006;
+}
+.button-light:hover {
+  background: #973e30;
+  color: #fff8e7;
+}
+.text-link:hover {
+  color: #e1a48a;
+}
+.date-strip p > span {
+  color: #cfc4af;
+}
+.date-number {
+  color: #d99d79;
+}
+.invitation {
+  position: relative;
+}
+.section-intro h2,
+.about h2,
+.household h2 {
+  color: #e8ddc5;
+}
+.eyebrow {
+  color: #c0a485;
+}
+.invitation-card {
+  background: linear-gradient(135deg, #23251bec, #0d110dee);
+  box-shadow: 0 15px 60px #0005;
+  border-color: #756647;
+}
+.ticket-top {
+  color: #d0a182;
+}
+.ticket-title {
+  color: #e4d5b8;
+  font-size: 56px;
+}
+.ticket-directions {
+  border-color: #756647;
+}
+.invitation-card::before,
+.invitation-card::after {
+  display: none;
+}
+.invitation-card dt {
+  font-size: 11px;
+}
+.invitation-card dd {
+  font-size: 13px;
+}
+.about {
+  border-top: 1px solid var(--line);
+  padding-top: 65px;
+}
+.brand-portrait {
+  background: #0a0d09d9;
+}
+.brand-portrait p {
+  color: #b9ab8d;
+}
+.bar-section {
+  background: #070b08e6;
+  border-block: 1px solid #514733;
+}
+.bar-heading > p,
+.bar-notes p,
+.byo-note p {
+  color: #beb8a6;
+}
+.bar-notes h3 {
+  font-size: 32px;
+}
+.resident-list > div {
+  border-top-color: #76603e;
+}
+.resident-list dt {
+  color: #ded0b2;
+}
+.roomie img {
+  border: 1px solid #76603e;
+  padding: 5px;
+  background: #10130e;
+}
+.closing {
+  background: #0b0c08a8;
+  border-top: 1px solid #76603e;
+}
+.closing-star {
+  color: #a34f37;
+  opacity: 0.5;
+}
+.site-footer {
+  padding-bottom: 85px;
+}
+.motion-toggle {
+  position: fixed;
+  z-index: 10;
+  bottom: 18px;
+  right: 22px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 15px;
+  border: 1px solid #837455;
+  color: #e8ddc5;
+  background: #0b0e0bf2;
+  font-size: 11px;
+  cursor: pointer;
+}
+.motion-toggle[hidden] {
+  display: none;
+}
+.motion-toggle:hover {
+  background: #2c2119;
+}
+@media (max-width: 1100px) {
+  .hero h1 {
+    font-size: 11vw;
+  }
+  .quarantine-mark {
+    right: 5%;
+    bottom: 98px;
+  }
+}
+@media (max-width: 760px) {
+  .hero {
+    padding: 46px 20px 0;
+    min-height: 760px;
+    gap: 0;
+  }
+  .hero h1 {
+    font-size: clamp(43px, 11.5vw, 85px);
+    margin: 26px 0;
+    letter-spacing: -0.04em;
+  }
+  .hero .eyebrow {
+    font-size: 8px;
+    letter-spacing: 2px;
+    gap: 8px;
+  }
+  .hero-intro {
+    font-size: 29px;
+  }
+  .hero-date {
+    gap: 12px;
+    font-size: 12px;
+  }
+  .hero-footnote {
+    max-width: 280px;
+    margin-inline: auto;
+    line-height: 1.8;
+  }
+  .hero .button {
+    margin-top: 28px;
+  }
+  .quarantine-mark {
+    position: relative;
+    inset: auto;
+    margin: 42px 0 38px;
+    padding: 12px 23px;
+  }
+  .quarantine-mark strong {
+    font-size: 28px;
+  }
+  .hero-bottom {
+    margin-top: auto;
+    gap: 10px;
+    font-size: 6px;
+  }
+  .hero-bottom a {
+    font-size: 9px;
+  }
+  .night-scene video {
+    object-position: 43% center;
+  }
+  .night-scene::after {
+    background: linear-gradient(#030603cf, #03060388 45%, #030603aa);
+  }
+  .about {
+    padding-top: 40px;
+  }
+  .ticket-title {
+    font-size: 49px;
+  }
+  .motion-toggle {
+    right: 12px;
+    bottom: 12px;
+    font-size: 10px;
+  }
+  .site-footer {
+    padding-bottom: 80px;
+  }
+}
+@media print {
+  .night-scene,
+  .motion-toggle,
+  body::before {
+    display: none !important;
+  }
+  body {
+    background: white;
+    color: black;
+  }
+  .invitation-card,
+  .invitation-card *,
+  .section-intro * {
+    color: black !important;
+    background: white !important;
   }
 }

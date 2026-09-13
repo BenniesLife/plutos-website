@@ -67,3 +67,60 @@ film?.addEventListener("toggle", () => {
     video.pause();
   }
 });
+
+// One quiet loop for the whole page, with explicit motion and data controls.
+const background = document.querySelector("#background-video");
+const motionToggle = document.querySelector(".motion-toggle");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const connection = navigator.connection;
+let userWantsMotion = !reducedMotion.matches && !connection?.saveData;
+
+if (background && motionToggle) {
+  background.muted = true;
+  motionToggle.hidden = false;
+
+  function updateMotionControl() {
+    const playing = !background.paused;
+    motionToggle.setAttribute("aria-pressed", String(playing));
+    motionToggle.innerHTML = playing
+      ? 'Pause background <span aria-hidden="true">Ⅱ</span>'
+      : 'Play background <span aria-hidden="true">▷</span>';
+  }
+
+  async function syncBackground() {
+    if (!userWantsMotion || document.hidden) {
+      background.pause();
+      updateMotionControl();
+      return;
+    }
+    if (!background.hasAttribute("src")) {
+      background.src = background.dataset.src;
+      background.load();
+    }
+    try {
+      await background.play();
+    } catch {
+      /* The still remains if autoplay is blocked. */
+    }
+    updateMotionControl();
+  }
+
+  motionToggle.addEventListener("click", () => {
+    userWantsMotion = background.paused;
+    syncBackground();
+  });
+  background.addEventListener("play", updateMotionControl);
+  background.addEventListener("pause", updateMotionControl);
+  reducedMotion.addEventListener("change", () => {
+    userWantsMotion = !reducedMotion.matches && !connection?.saveData;
+    syncBackground();
+  });
+  connection?.addEventListener("change", () => {
+    if (connection.saveData) {
+      userWantsMotion = false;
+      syncBackground();
+    }
+  });
+  document.addEventListener("visibilitychange", syncBackground);
+  syncBackground();
+}

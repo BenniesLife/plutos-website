@@ -115,15 +115,19 @@ test("layouts fit narrow phones, tablets and desktop screens", async ({
 test("film loads only on request and pauses when closed", async ({ page }) => {
   const videoRequests = [];
   page.on("request", (request) => {
-    if (request.url().endsWith(".mp4")) videoRequests.push(request.url());
+    if (request.url().endsWith("/plutos-halloween-2026.mp4"))
+      videoRequests.push(request.url());
   });
   await page.goto("/");
-  const video = page.locator("video");
+  const video = page.locator(".invitation-film video");
   await expect(video).toHaveAttribute("preload", "none");
   expect(await video.evaluate((el) => el.autoplay)).toBe(false);
   expect(videoRequests).toEqual([]);
   await page.locator("summary").click();
   await expect(video).toBeVisible();
+  await expect
+    .poll(() => video.evaluate((el) => el.readyState))
+    .toBeGreaterThanOrEqual(1);
   await video.evaluate((el) => el.play());
   await expect.poll(() => video.evaluate((el) => el.paused)).toBe(false);
   await page.locator("summary").click();
@@ -175,4 +179,109 @@ test("page passes automated accessibility checks with reduced motion", async ({
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
     .analyze();
   expect(expanded.violations).toEqual([]);
+});
+
+test("background plays silently, can be paused, and respects tab visibility", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  const background = page.locator("#background-video");
+  await expect
+    .poll(() =>
+      background.evaluate((video) => !video.paused && video.currentTime > 0),
+    )
+    .toBe(true);
+  expect(
+    await background.evaluate(
+      (video) => video.muted && video.loop && video.hasAttribute("playsinline"),
+    ),
+  ).toBe(true);
+  await page.getByRole("button", { name: "Pause background" }).click();
+  expect(await background.evaluate((video) => video.paused)).toBe(true);
+  await page.getByRole("button", { name: "Play background" }).click();
+  await expect
+    .poll(() => background.evaluate((video) => video.paused))
+    .toBe(false);
+  await page.evaluate(() => {
+    Object.defineProperty(document, "hidden", {
+      configurable: true,
+      value: true,
+    });
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await expect
+    .poll(() => background.evaluate((video) => video.paused))
+    .toBe(true);
+  await page.evaluate(() => {
+    Object.defineProperty(document, "hidden", {
+      configurable: true,
+      value: false,
+    });
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await expect
+    .poll(() => background.evaluate((video) => video.paused))
+    .toBe(false);
+});
+
+test("reduced motion uses a still until the visitor chooses to play", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const requests = [];
+  page.on("request", (request) => {
+    if (request.url().endsWith(".mp4")) requests.push(request.url());
+  });
+  await page.goto("/");
+  const background = page.locator("#background-video");
+  await expect(background).not.toHaveAttribute("src");
+  expect(requests).toEqual([]);
+  await page.getByRole("button", { name: "Play background" }).click();
+  await expect
+    .poll(() => background.evaluate((video) => video.paused))
+    .toBe(false);
+  await page.getByRole("button", { name: "Pause background" }).click();
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await expect
+    .poll(() => background.evaluate((video) => video.paused))
+    .toBe(false);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect
+    .poll(() => background.evaluate((video) => video.paused))
+    .toBe(true);
+});
+
+test("data saver and blocked autoplay retain a usable still background", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    const connection = new EventTarget();
+    connection.saveData = true;
+    Object.defineProperty(navigator, "connection", {
+      configurable: true,
+      value: connection,
+    });
+  });
+  await page.goto("/");
+  const background = page.locator("#background-video");
+  await expect(background).not.toHaveAttribute("src");
+  await expect(
+    page.getByRole("button", { name: "Play background" }),
+  ).toBeVisible();
+  await page.evaluate(() => {
+    document.querySelector("#background-video").play = () =>
+      Promise.reject(new DOMException("Blocked", "NotAllowedError"));
+  });
+  await page.getByRole("button", { name: "Play background" }).click();
+  await expect(
+    page.getByRole("button", { name: "Play background" }),
+  ).toBeVisible();
+  await expect(background).toHaveAttribute(
+    "poster",
+    "./assets/overgrowth-background.webp",
+  );
+  await expect(
+    page.getByRole("link", { name: "Enter the overgrowth" }),
+  ).toBeVisible();
 });

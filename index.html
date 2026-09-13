@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#182c24" />
+    <meta name="theme-color" content="#090b09" />
     <meta
       name="description"
       content="The Overgrowth. Halloween at Pluto’s Family Bar, Benoni. Saturday 31 October 2026, from 4pm. A night for friends, family and whatever’s growing in the garden."
@@ -19,11 +19,11 @@
     <meta property="og:url" content="https://www.plutos.co.za/" />
     <meta
       property="og:image"
-      content="https://www.plutos.co.za/assets/overgrowth-social.png"
+      content="https://www.plutos.co.za/assets/overgrowth-night-social.png"
     />
     <meta
       property="og:image:alt"
-      content="The Overgrowth. Halloween at Pluto’s, 31 October 2026, from 4pm. Antique fern print on a dark green background."
+      content="The Overgrowth. Halloween at Pluto’s, 31 October 2026, from 4pm. Dark vines and mist surround a parchment-coloured Halloween title."
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -32,13 +32,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
     <script src="./script.js" defer></script>
   </head>
   <body id="top">
+    <div class="night-scene" aria-hidden="true">
+      <video
+        id="background-video"
+        muted
+        loop
+        playsinline
+        preload="none"
+        tabindex="-1"
+        poster="./assets/overgrowth-background.webp"
+        data-src="./assets/overgrowth-background.mp4"
+      ></video>
+    </div>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="wordmark" href="#top" aria-label="Pluto’s Family Bar, home"
@@ -71,7 +83,10 @@
             PLUTO’S · 2026
           </p>
           <h1 id="hero-title">
-            The<br />Overgrowth<span class="title-period">.</span>
+            <span class="title-prelude">The</span>Overgrowth<span
+              class="title-period"
+              >.</span
+            >
           </h1>
           <p class="hero-intro">Something’s taken root.</p>
           <p class="hero-date">
@@ -84,32 +99,18 @@
             evening on the wild side.
           </p>
           <a class="button button-light" href="#invite"
-            >You’re invited <span aria-hidden="true">↗</span></a
+            >Enter the overgrowth <span aria-hidden="true">↗</span></a
           >
           <p class="hero-footnote">
-            A private party. A familiar place. A little overgrown.
+            The gate opens at four. Come as something other than yourself.
           </p>
         </div>
-        <figure class="botanical">
-          <div class="botanical-top">
-            <span>PLUTO’S BOTANICAL OBSERVATORY</span><span>No. 031</span>
-          </div>
-          <img
-            src="./assets/fern.webp"
-            alt="A delicate antique nature print of fern fronds, with their roots and curled leaves"
-            width="1000"
-            height="1528"
-            fetchpriority="high"
-          />
-          <div class="botanical-bottom">
-            <span>Polypodium vulgare</span><span>THE OVERGROWTH / 2026</span>
-          </div>
-          <span class="botanical-stamp" aria-hidden="true"
-            >GROWING<br />OUT OF<br /><em>control</em></span
-          >
-        </figure>
+        <div class="quarantine-mark" aria-hidden="true">
+          <span>QUARANTINE NOTICE</span><strong>BREACHED</strong
+          ><small>PLUTO’S · 31 / 10 / 2026</small>
+        </div>
         <div class="hero-bottom">
-          <span>FRIENDS & FAMILY WELCOME. AS ALWAYS.</span
+          <span>CONTAINMENT STATUS: COMPROMISED</span
           ><a href="#invite"
             >The evening ahead <span aria-hidden="true">↓</span></a
           >
@@ -138,8 +139,8 @@
         aria-labelledby="invite-title"
       >
         <div class="section-intro">
-          <p class="eyebrow">01 / THE OCCASION</p>
-          <h2 id="invite-title">Let things<br />get a little wild.</h2>
+          <p class="eyebrow">01 / THE QUARANTINE NOTICE</p>
+          <h2 id="invite-title">You’ve been<br />warned.</h2>
           <p>
             Our usual spot, with something strange growing in the corners. The
             Overgrowth is this year’s Halloween at Pluto’s.
@@ -157,7 +158,8 @@
         </div>
         <div class="invitation-card">
           <div class="ticket-top">
-            <span>FRIENDS &amp; FAMILY</span><span aria-hidden="true">✳</span>
+            <span>PRIVATE GATHERING · 31 OCTOBER</span
+            ><span aria-hidden="true">✳</span>
           </div>
           <p class="ticket-title">Halloween<br />at Pluto’s</p>
           <dl>
@@ -291,8 +293,8 @@
         <div class="section-wrap bar-inner">
           <div class="bar-heading">
             <div>
-              <p class="eyebrow">03 / PULL UP A CHAIR</p>
-              <h2 id="bar-title">Same place.<br />Good company.</h2>
+              <p class="eyebrow">03 / AFTER DARK</p>
+              <h2 id="bar-title">A familiar place.<br />After nightfall.</h2>
             </div>
             <p>
               No cocktail menu. No dress code on an ordinary Friday. Just a few
@@ -343,7 +345,7 @@
         aria-labelledby="residents-title"
       >
         <div class="household-heading">
-          <p class="eyebrow">04 / THE REGULARS</p>
+          <p class="eyebrow">04 / THE NIGHT WATCH</p>
           <h2 id="residents-title">They were here first.</h2>
           <p>Three dogs, one cat. All convinced it’s their house.</p>
         </div>
@@ -408,10 +410,10 @@
           <p class="eyebrow">31 OCTOBER 2026 · FROM 4PM</p>
           <h2 id="closing-title">See you in<br />the overgrowth.</h2>
           <a class="button button-light" href="#invite"
-            >Keep the evening free <span aria-hidden="true">↗</span></a
+            >Join us after dark <span aria-hidden="true">↗</span></a
           >
           <p>Pluto’s Family Bar · Benoni · Invite only</p>
-          <span class="closing-star" aria-hidden="true">✳</span>
+          <span class="closing-star" aria-hidden="true">☣</span>
         </div>
       </section>
     </main>
@@ -428,14 +430,17 @@
       >
       <div class="footer-fineprint">
         <span>Made for the people who make this place.</span
-        ><a
-          href="https://commons.wikimedia.org/wiki/File:Polypodium_vulgare_Moore1.png"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Botanical print: Henry Bradbury, 1857
-          <span class="sr-only">(opens in a new tab)</span></a
-        >
+        ><span>Halloween at Pluto’s · The Overgrowth, 2026</span>
       </div>
     </footer>
+    <button
+      class="motion-toggle"
+      type="button"
+      aria-controls="background-video"
+      aria-pressed="false"
+      hidden
+    >
+      Play background <span aria-hidden="true">▷</span>
+    </button>
   </body>
 </html>

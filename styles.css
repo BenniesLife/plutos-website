@@ -1593,3 +1593,336 @@ body::before {
     background: white !important;
   }
 }
+
+.house-motto {
+  max-width: 870px;
+  margin: 58px auto 44px;
+  font: italic 400 clamp(26px, 3vw, 37px)/1.4 var(--display);
+  text-align: center;
+  color: #ddceb0;
+}
+.house-motto cite {
+  display: block;
+  margin-top: 20px;
+  font: 500 9px/1.5 var(--sans);
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #bb9e7b;
+}
+.drinks-board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px 70px;
+  padding-top: 40px;
+}
+.drinks-board h3 {
+  margin: 14px 0 18px;
+  font-size: 32px;
+}
+.drinks-board ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.drinks-board li {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+  font-size: 13px;
+  color: #c9c1af;
+}
+.drinks-board > p {
+  grid-column: 1/-1;
+  font-size: 12px;
+  color: var(--muted);
+}
+.house-notes {
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 45px;
+  align-items: start;
+}
+.roomie {
+  grid-template-columns: 190px minmax(0, 1fr);
+  align-items: start;
+}
+.roomie img {
+  width: 190px;
+  height: 330px;
+}
+.house-notes p:not(.eyebrow) {
+  font-size: 14px;
+  line-height: 1.85;
+}
+.house-notes p + p {
+  margin-top: 16px;
+}
+.house-notes .roomie-role {
+  color: #d0ad87;
+  font: italic 17px/1.4 var(--display);
+}
+.appliance {
+  align-self: start;
+}
+@media (max-width: 1100px) {
+  .house-notes {
+    grid-template-columns: 1fr;
+  }
+  .roomie {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 35px;
+  }
+  .roomie img {
+    width: 220px;
+    height: 310px;
+  }
+  .appliance {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 28px 0 0;
+  }
+}
+@media (max-width: 760px) {
+  .house-motto {
+    margin: 38px 0;
+  }
+  .drinks-board {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .roomie {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .roomie img {
+    width: 100%;
+    max-width: 320px;
+    height: 340px;
+  }
+  .house-notes {
+    gap: 32px;
+  }
+  .house-notes h3 {
+    font-size: 33px;
+  }
+}
+
+.resident-list {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.bennie-story {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 60px;
+  margin-top: 45px;
+  padding: 34px;
+  background: #10130ee8;
+  border: 1px solid #76603e;
+}
+.bennie-sign h3 {
+  font-size: 47px;
+  margin: 17px 0;
+}
+.bennie-sign > p {
+  color: #d0ad87;
+  font: italic 22px/1.4 var(--display);
+}
+.bennie-story > div:last-child > p:not(.small-note) {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.bennie-story p + p {
+  margin-top: 15px;
+}
+@media (max-width: 1100px) {
+  .site-header nav {
+    gap: 16px;
+  }
+  .site-header nav a {
+    font-size: 11px;
+  }
+}
+@media (max-width: 760px) {
+  .resident-list {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bennie-story {
+    grid-template-columns: 1fr;
+    padding: 25px;
+    gap: 25px;
+  }
+  .site-header nav a {
+    font-size: 12px;
+  }
+}
+/* Keep the moving roots behind the atmosphere, not the long-form reading. */
+.invitation,
+.about,
+.household {
+  background: #070a07c9;
+  box-shadow: 0 0 45px 25px #070a07c9;
+}
+
+/* Fog, spores and edge growth share the video’s pause/reduced-motion state. */
+.night-scene {
+  overflow: hidden;
+}
+.night-scene video {
+  transform: scale(1.035) translate(var(--scene-x, 0px), var(--scene-y, 0px));
+}
+#spore-field {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  opacity: 0.85;
+}
+.fog {
+  position: absolute;
+  z-index: 3;
+  width: 170%;
+  height: 42%;
+  left: -35%;
+  pointer-events: none;
+  filter: blur(24px);
+  opacity: 0.23;
+  background:
+    radial-gradient(ellipse at 16% 60%, #b2b9aa52, transparent 28%),
+    radial-gradient(ellipse at 55% 50%, #a8b2a661, transparent 33%),
+    radial-gradient(ellipse at 86% 70%, #c2c4b43b, transparent 27%);
+  animation: fog-drift 28s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.fog-near {
+  bottom: -12%;
+}
+.fog-far {
+  top: 2%;
+  opacity: 0.14;
+  animation-duration: 41s;
+  animation-direction: alternate-reverse;
+}
+.edge-vines {
+  position: absolute;
+  z-index: 3;
+  top: -3%;
+  height: 108%;
+  width: clamp(70px, 12vw, 170px);
+  overflow: visible;
+  opacity: 0.62;
+  animation: vine-sway 17s ease-in-out infinite alternate;
+  animation-play-state: paused;
+  transform-origin: 50% 100%;
+}
+.vines-left {
+  left: -25px;
+}
+.vines-right {
+  right: -25px;
+  scale: -1 1;
+  animation-delay: -8s;
+}
+.vine-stem {
+  fill: none;
+  stroke: #626241;
+  stroke-width: 3;
+}
+.vine-stem path + path {
+  stroke-width: 1.5;
+}
+.vine-leaf {
+  fill: #1d2918;
+  stroke: #6c6d475e;
+  stroke-width: 1;
+  animation: leaf-breathe 12s ease-in-out infinite alternate;
+  animation-delay: var(--leaf-delay);
+  animation-play-state: paused;
+}
+.leaf-vein {
+  fill: none;
+  stroke: #64644388;
+}
+.motion-running .fog,
+.motion-running .edge-vines,
+.motion-running .vine-leaf {
+  animation-play-state: running;
+}
+@keyframes fog-drift {
+  from {
+    transform: translate3d(-7%, 8%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(8%, -10%, 0) scale(1.12);
+  }
+}
+@keyframes vine-sway {
+  from {
+    transform: rotate(-1.5deg) translateY(0);
+  }
+  to {
+    transform: rotate(1.7deg) translateY(-8px);
+  }
+}
+@keyframes leaf-breathe {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 760px) {
+  .edge-vines {
+    width: 65px;
+    opacity: 0.48;
+  }
+  .vines-left {
+    left: -23px;
+  }
+  .vines-right {
+    right: -23px;
+  }
+  .fog {
+    filter: blur(18px);
+  }
+  #spore-field {
+    opacity: 0.7;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .night-scene video {
+    transform: none;
+  }
+}
+
+.brand-portrait {
+  background: #000;
+  padding: 20px;
+  min-height: 0;
+}
+.brand-portrait img {
+  max-width: 100%;
+  filter: none;
+  mix-blend-mode: normal;
+  opacity: 1;
+}
+.brand-portrait p {
+  margin-top: 16px;
+}
+
+.site-header {
+  padding-block: 12px;
+}
+.header-logo {
+  width: 108px;
+}
+.header-logo img {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 760px) {
+  .header-logo {
+    width: 95px;
+  }
+}

@@ -181,12 +181,19 @@ test("page passes automated accessibility checks with reduced motion", async ({
   expect(expanded.violations).toEqual([]);
 });
 
-test("background plays silently, can be paused, and respects tab visibility", async ({
+test("background plays silently with autoplay fallback, pause and tab visibility", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
   const background = page.locator("#background-video");
+  await expect
+    .poll(() => background.evaluate((video) => video.readyState))
+    .toBeGreaterThanOrEqual(2);
+  // Safari and device power policies may require a gesture, even for muted video.
+  if (await background.evaluate((video) => video.paused)) {
+    await page.getByRole("button", { name: "Play effects" }).click();
+  }
   await expect
     .poll(() =>
       background.evaluate((video) => !video.paused && video.currentTime > 0),
@@ -197,9 +204,9 @@ test("background plays silently, can be paused, and respects tab visibility", as
       (video) => video.muted && video.loop && video.hasAttribute("playsinline"),
     ),
   ).toBe(true);
-  await page.getByRole("button", { name: "Pause background" }).click();
+  await page.getByRole("button", { name: "Pause effects" }).click();
   expect(await background.evaluate((video) => video.paused)).toBe(true);
-  await page.getByRole("button", { name: "Play background" }).click();
+  await page.getByRole("button", { name: "Play effects" }).click();
   await expect
     .poll(() => background.evaluate((video) => video.paused))
     .toBe(false);
@@ -237,11 +244,11 @@ test("reduced motion uses a still until the visitor chooses to play", async ({
   const background = page.locator("#background-video");
   await expect(background).not.toHaveAttribute("src");
   expect(requests).toEqual([]);
-  await page.getByRole("button", { name: "Play background" }).click();
+  await page.getByRole("button", { name: "Play effects" }).click();
   await expect
     .poll(() => background.evaluate((video) => video.paused))
     .toBe(false);
-  await page.getByRole("button", { name: "Pause background" }).click();
+  await page.getByRole("button", { name: "Pause effects" }).click();
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await expect
     .poll(() => background.evaluate((video) => video.paused))
@@ -252,7 +259,7 @@ test("reduced motion uses a still until the visitor chooses to play", async ({
     .toBe(true);
 });
 
-test("data saver and blocked autoplay retain a usable still background", async ({
+test("data saver and failed playback retain a usable still background", async ({
   page,
 }) => {
   await page.addInitScript(() => {
@@ -267,15 +274,12 @@ test("data saver and blocked autoplay retain a usable still background", async (
   const background = page.locator("#background-video");
   await expect(background).not.toHaveAttribute("src");
   await expect(
-    page.getByRole("button", { name: "Play background" }),
+    page.getByRole("button", { name: "Play effects" }),
   ).toBeVisible();
-  await page.evaluate(() => {
-    document.querySelector("#background-video").play = () =>
-      Promise.reject(new DOMException("Blocked", "NotAllowedError"));
-  });
-  await page.getByRole("button", { name: "Play background" }).click();
+  await page.route("**/overgrowth-background.mp4", (route) => route.abort());
+  await page.getByRole("button", { name: "Play effects" }).click();
   await expect(
-    page.getByRole("button", { name: "Play background" }),
+    page.getByRole("button", { name: "Play effects" }),
   ).toBeVisible();
   await expect(background).toHaveAttribute(
     "poster",
@@ -284,4 +288,43 @@ test("data saver and blocked autoplay retain a usable still background", async (
   await expect(
     page.getByRole("link", { name: "Enter the overgrowth" }),
   ).toBeVisible();
+});
+
+test("fog and canvas effects pause together with the background", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  const background = page.locator("#background-video");
+  await expect
+    .poll(() => background.evaluate((video) => video.readyState))
+    .toBeGreaterThanOrEqual(2);
+  if (await background.evaluate((video) => video.paused))
+    await page.getByRole("button", { name: "Play effects" }).click();
+  await expect(page.locator("html")).toHaveClass(/motion-running/);
+  expect(
+    await page
+      .locator(".fog-near")
+      .evaluate((el) => getComputedStyle(el).animationPlayState),
+  ).toBe("running");
+  const canvas = page.locator("#spore-field");
+  const moving = await canvas.evaluate((el) => el.toDataURL());
+  await expect
+    .poll(() => canvas.evaluate((el) => el.toDataURL()))
+    .not.toBe(moving);
+  await page.getByRole("button", { name: "Pause effects" }).click();
+  await expect(page.locator("html")).not.toHaveClass(/motion-running/);
+  expect(
+    await page
+      .locator(".fog-near")
+      .evaluate((el) => getComputedStyle(el).animationPlayState),
+  ).toBe("paused");
+  const still = await canvas.evaluate((el) => el.toDataURL());
+  await page.evaluate(
+    () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve)),
+      ),
+  );
+  expect(await canvas.evaluate((el) => el.toDataURL())).toBe(still);
 });

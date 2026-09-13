@@ -73,6 +73,7 @@ const background = document.querySelector("#background-video");
 const motionToggle = document.querySelector(".motion-toggle");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const connection = navigator.connection;
+let motionRequest = 0;
 let userWantsMotion = !reducedMotion.matches && !connection?.saveData;
 
 if (background && motionToggle) {
@@ -80,29 +81,39 @@ if (background && motionToggle) {
   motionToggle.hidden = false;
 
   function updateMotionControl() {
-    const playing = !background.paused;
+    const playing = !background.paused && !background.error;
+    document.documentElement.classList.toggle("motion-running", playing);
+    window.dispatchEvent(
+      new CustomEvent("plutos:motion", { detail: { playing } }),
+    );
     motionToggle.setAttribute("aria-pressed", String(playing));
     motionToggle.innerHTML = playing
-      ? 'Pause background <span aria-hidden="true">Ⅱ</span>'
-      : 'Play background <span aria-hidden="true">▷</span>';
+      ? 'Pause effects <span aria-hidden="true">Ⅱ</span>'
+      : 'Play effects <span aria-hidden="true">▷</span>';
   }
 
   async function syncBackground() {
+    const request = ++motionRequest;
+    background.autoplay = userWantsMotion && !document.hidden;
     if (!userWantsMotion || document.hidden) {
       background.pause();
       updateMotionControl();
       return;
     }
-    if (!background.hasAttribute("src")) {
+    if (!background.hasAttribute("src") || background.error) {
       background.src = background.dataset.src;
       background.load();
     }
     try {
       await background.play();
     } catch {
-      /* The still remains if autoplay is blocked. */
+      // A blocked or failed video must not leave the UI claiming it is playing.
+      if (request === motionRequest) {
+        background.autoplay = false;
+        background.pause();
+      }
     }
-    updateMotionControl();
+    if (request === motionRequest) updateMotionControl();
   }
 
   motionToggle.addEventListener("click", () => {
@@ -110,6 +121,10 @@ if (background && motionToggle) {
     syncBackground();
   });
   background.addEventListener("play", updateMotionControl);
+  background.addEventListener("error", () => {
+    background.pause();
+    updateMotionControl();
+  });
   background.addEventListener("pause", updateMotionControl);
   reducedMotion.addEventListener("change", () => {
     userWantsMotion = !reducedMotion.matches && !connection?.saveData;

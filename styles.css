@@ -381,10 +381,10 @@ h3 {
   margin-left: 24px;
 }
 .invitation {
-  padding-block: 110px 80px;
+  padding-block: 36px 65px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 65px 100px;
+  grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+  gap: 65px 80px;
   position: relative;
 }
 .invitation::before,
@@ -395,6 +395,45 @@ h3 {
   inset: 0 calc((min(1200px, 100vw - 112px) - 100vw) / 2);
   background: #090e0bf5;
   z-index: -1;
+}
+.invitation::before {
+  background: linear-gradient(90deg, #090e0be8, #090e0bba);
+}
+.invitation-art {
+  min-width: 0;
+}
+.invite-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+.invite-actions .button {
+  font-size: 12px;
+  gap: 10px;
+  padding-inline: 18px;
+}
+.button-outline {
+  background: #0b130dc9;
+  border-color: #bda47e80;
+  color: #eadbc0;
+}
+.button-outline:hover {
+  background: #24321f;
+}
+.invite-actions .film-link {
+  grid-column: 1 / -1;
+  justify-content: center;
+  min-height: 48px;
+  font-size: 13px;
+}
+.invitation-card h1 {
+  font: 400 clamp(45px, 5.8vw, 84px)/0.98 var(--display);
+  letter-spacing: -2px;
+  margin: 24px 0;
+}
+.invitation-card .hero-intro {
+  margin-bottom: 30px;
 }
 .section-intro {
   grid-column: 1 / -1;
@@ -442,7 +481,7 @@ h3 {
   padding: 35px 0 0;
   color: var(--ink);
   border-top: 1px solid #b9a17a66;
-  align-self: center;
+  align-self: start;
 }
 .ticket-top {
   display: flex;
@@ -982,10 +1021,9 @@ h3 {
   color: #a9ae9f;
 }
 .motion-toggle {
-  position: fixed;
-  z-index: 10;
-  bottom: 18px;
-  right: 20px;
+  position: static;
+  margin-left: auto;
+  flex-shrink: 0;
   display: flex;
   gap: 13px;
   align-items: center;
@@ -1130,6 +1168,9 @@ h3 {
   }
 }
 @media (max-width: 1100px) {
+  .invitation {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
   .section-wrap {
     width: calc(100% - 72px);
   }
@@ -1199,27 +1240,29 @@ h3 {
     margin-inline: 0;
   }
 }
-@media (max-width: 760px) {
-  .section-wrap {
-    width: calc(100% - 40px);
-  }
+@media (max-width: 960px) {
   .site-header {
-    padding: 12px 20px;
+    padding: 8px 16px;
     flex-wrap: wrap;
-    gap: 0;
+    gap: 10px;
   }
   .header-logo {
-    width: 84px;
+    width: 70px;
   }
   .site-header nav {
     width: 100%;
     flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 15px 24px;
-    padding: 20px 0 8px;
+    gap: 8px;
+    padding: 12px 0 8px;
   }
   .site-header nav a {
-    font-size: 12px;
+    font-size: 14px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    width: calc(50% - 4px);
   }
   .site-header nav .nav-invite {
     margin: 0;
@@ -1232,6 +1275,11 @@ h3 {
   }
   .js .site-header nav.is-open {
     display: flex;
+  }
+}
+@media (max-width: 760px) {
+  .section-wrap {
+    width: calc(100% - 40px);
   }
   .hero {
     min-height: 710px;
@@ -1340,9 +1388,9 @@ h3 {
     padding-top: 0;
   }
   .invitation {
-    padding-block: 65px 50px;
+    padding-block: 16px 40px;
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 35px;
   }
   .invitation::before,
   .about::before,
@@ -1382,7 +1430,39 @@ h3 {
     gap: 10px;
   }
   .invitation-card dd {
+    font-size: 15px;
+  }
+  .invitation-card dt {
     font-size: 12px;
+  }
+  .invitation-card h1 {
+    font-size: clamp(45px, 12vw, 65px);
+  }
+  .ticket-directions {
+    min-height: 52px;
+    font-size: 14px;
+  }
+  .invite-actions {
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .invite-actions .button {
+    min-height: 50px;
+    font-size: 12px;
+    padding: 12px;
+  }
+  .invitation-poster > a {
+    padding: 4px;
+  }
+  .invitation-poster figcaption {
+    padding-top: 10px;
+    font-size: 10px;
+  }
+  .invitation-poster figcaption span {
+    font-size: 10px;
+  }
+  .text-link {
+    min-height: 44px;
   }
   .invitation-film summary {
     align-items: flex-start;
@@ -1602,10 +1682,20 @@ h3 {
     margin-top: 0;
   }
   .motion-toggle {
-    right: 12px;
-    bottom: 12px;
-    font-size: 9px;
-    padding-inline: 13px;
+    font-size: 10px;
+    padding-inline: 11px;
+    gap: 8px;
+  }
+  .bar-notes p,
+  .about-copy > p:not(.eyebrow):not(.lead),
+  .household-heading > p:last-child,
+  .invitation-copy > p,
+  .bennie-story > div:last-child > p:not(.small-note),
+  .house-notes p:not(.eyebrow) {
+    font-size: 15px;
+  }
+  .house-notes p.roomie-role {
+    font-size: 19px;
   }
 }
 @media (prefers-reduced-motion: no-preference) {

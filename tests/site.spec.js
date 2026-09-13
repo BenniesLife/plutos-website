@@ -147,7 +147,12 @@ test("page and navigation remain usable without JavaScript", async ({
   await expect(page).toHaveURL(/#residents$/);
   await expect(page.locator("#residents")).toBeVisible();
   await page.locator("summary").click();
-  await expect(page.locator("video")).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Watch or download the invitation film" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Watch or download the invitation film" }),
+  ).toHaveAttribute("href", "./assets/plutos-halloween-2026.mp4");
   await context.close();
 });
 

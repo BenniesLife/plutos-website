@@ -53,8 +53,17 @@ if (toggle && navigation) {
     .addEventListener("change", () => closeMenu());
 }
 
-// The film only plays on request, and stops when its disclosure is closed.
+// Some browsers ignore preload="none". Keep the source detached until opened.
 const film = document.querySelector(".invitation-film");
+const video = film?.querySelector("video");
+if (video) video.hidden = false;
 film?.addEventListener("toggle", () => {
-  if (!film.open) film.querySelector("video")?.pause();
+  if (!video) return;
+  const source = video.querySelector("source");
+  if (film.open && source && !source.hasAttribute("src")) {
+    source.src = source.dataset.src;
+    video.load();
+  } else if (!film.open) {
+    video.pause();
+  }
 });

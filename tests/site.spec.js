@@ -123,7 +123,9 @@ test("film loads only on request and pauses when closed", async ({ page }) => {
   await expect(video).toHaveAttribute("preload", "none");
   expect(await video.evaluate((el) => el.autoplay)).toBe(false);
   expect(videoRequests).toEqual([]);
-  await page.locator("summary").click();
+  await page
+    .getByRole("link", { name: "Watch the invitation", exact: true })
+    .click();
   await expect(video).toBeVisible();
   await expect
     .poll(() => video.evaluate((el) => el.readyState))
@@ -276,14 +278,14 @@ test("data saver and failed playback retain a usable still background", async ({
   await expect(
     page.getByRole("button", { name: "Play effects" }),
   ).toBeVisible();
-  await page.route("**/overgrowth-background.mp4", (route) => route.abort());
+  await page.route("**/greenhouse-loop.mp4", (route) => route.abort());
   await page.getByRole("button", { name: "Play effects" }).click();
   await expect(
     page.getByRole("button", { name: "Play effects" }),
   ).toBeVisible();
   await expect(background).toHaveAttribute(
     "poster",
-    "./assets/overgrowth-background.webp",
+    "./assets/greenhouse-night.webp",
   );
   await expect(
     page.getByRole("link", { name: "Enter the overgrowth" }),

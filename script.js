@@ -56,6 +56,9 @@ if (toggle && navigation) {
 // Some browsers ignore preload="none". Keep the source detached until opened.
 const film = document.querySelector(".invitation-film");
 const video = film?.querySelector("video");
+document.querySelector(".film-link")?.addEventListener("click", () => {
+  if (film) film.open = true;
+});
 if (video) video.hidden = false;
 film?.addEventListener("toggle", () => {
   if (!video) return;

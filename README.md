@@ -2,7 +2,7 @@
 
 The website at **https://www.plutos.co.za/**. This repository serves the public site; `MichaelBernhardt/plutos-bar` is the separate legacy Ionic gate-control app.
 
-The 2026 Halloween edition adapts the supplied “The Overgrowth” design with a dark botanical-horror layout, a full-page moving background derived from the original invitation film, a seasonal edition of the new Pluto’s logo, and the existing photograph of Tiaan. Event details are readable text, and the original invitation poster and silent film remain available to download.
+The 2026 Halloween edition adapts the supplied “The Overgrowth” design with a dark botanical-horror layout, a cinematic greenhouse background, a seasonal edition of the new Pluto’s logo, and real photographs of Slate “Pointy” and Tiaan. Event details are readable text, and the actual supplied invitation poster is displayed prominently on the page. It and the silent film remain available to download.
 
 ## Preview and check
 
@@ -43,24 +43,23 @@ SITE_URL=https://www.plutos.co.za npm test
 - `assets/plutos-halloween-2026-poster.*`, `assets/plutos-halloween-2026.mp4`: original supplied invitation media. The video is silent and has no autoplay; the event information is also provided in HTML.
 - `assets/plutos-logo-2026-original.png`: the new approved master logo, preserved unchanged. `assets/plutos-logo-2026.webp` is the normal web version. `assets/plutos-logo-halloween-2026.webp` is the temporary Halloween edition, created with ChatGPT image generation. See [brand guidance and prompt](assets/README.md). `assets/tiaan.webp` is the optimized real household photograph.
 - `assets/fern.webp`: retained artwork from the earlier design (not displayed in the Halloween theme), an optimized public-domain botanical plate, **Polypodium vulgare**, from _The Ferns of Great Britain and Ireland_ (1857), by Thomas Moore, edited by John Lindley, nature-printed by Henry Bradbury. [Original scan and rights information on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Polypodium_vulgare_Moore1.png). Attribution is retained here. No generated photographs of the venue or residents are used.
-- `assets/overgrowth-night-social.png`: a 1200 × 630 browser-rendered preview of the new design for social sharing. `assets/invitation-preview.webp` is the lightweight thumbnail for the original film.
+- `assets/overgrowth-cinema-social.png`: a 1200 × 630 browser-rendered preview of the new design for social sharing. `assets/invitation-preview.webp` is the lightweight thumbnail for the original film.
 - Typography: Cormorant Garamond and DM Sans, served by Google Fonts with Georgia and Arial fallbacks.
 - `robots.txt`, `sitemap.xml`: public search discovery. Inclusion in search results is controlled by search engines.
 
-The original Downloads pack is kept untouched. The archived April 2026 Roomie of the Month is labelled with its date. The fuller household stories, six bar features, drinks and braai lists, and house motto are retained in a conversational voice. Bennie has his own introduction and a place among the residents, with recurring mentions throughout the page.
+The original Downloads pack is kept untouched. Slate “Pointy” is September 2026’s Roomie of the Month, with the user-supplied photo preserved unchanged and an optimized WebP used on the page. The coffee machine is September’s appliance winner; Tiaan’s fuller April 2026 roomie story remains as a dated previous feature. The fuller household stories, six bar features, drinks and braai lists, and house motto are retained in a conversational voice. Bennie has his own introduction and a place among the residents, with recurring mentions throughout the page.
 
 ## Halloween background
 
-`assets/overgrowth-background.mp4` is a silent 7-second loop (about 220 KB) made from the supplied invitation video. The lower vines are cropped to exclude the poster’s lettering, and a clean 2.5-second segment is slowed down and plays forward then backward for a continuous loop. `assets/overgrowth-background.webp` is its 41 KB still fallback. No external video service, tracking or subscription is needed.
+`assets/greenhouse-loop.mp4` is a silent 12-second loop (about 1 MB). It adds a gentle, continuous push in and out of custom greenhouse concept artwork made with ChatGPT’s built-in image tool. `assets/greenhouse-night.webp` is the 180 KB static fallback. The original artwork and exact prompt are preserved in `assets/README.md`. This is Halloween scenery, not a photograph of the venue. The previous cropped-root background is retained for old links.
 
-The loop plays inline on desktop and mobile. A persistent control pauses or resumes it; it also pauses when the page is hidden. Reduced-motion and data-saving preferences prevent the video from loading until the visitor explicitly chooses to play. If JavaScript or autoplay is unavailable, the still background remains. The original full invitation is loaded separately only when its disclosure is opened.
+The loop plays inline on desktop and mobile. A persistent control pauses or resumes it; it also pauses when the page is hidden. Reduced-motion and data-saving preferences prevent the video from loading until the visitor explicitly chooses to play. If JavaScript or autoplay is unavailable, the still background remains. The original invitation film is loaded separately only when its disclosure is opened, including through the hero’s “Watch the invitation” link. The full poster is visible in the invitation section, with a link to its original full-resolution PNG.
 
 To reproduce the background with FFmpeg and cwebp:
 
 ```sh
-ffmpeg -ss 7 -t 2.5 -i assets/plutos-halloween-2026.mp4 -filter_complex '[0:v]crop=1080:320:0:1216,setpts=1.4*PTS,fps=20,split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1:a=0,format=yuv420p[v]' -map '[v]' -an -c:v libx264 -preset slow -crf 26 -movflags +faststart assets/overgrowth-background.mp4
-ffmpeg -ss 3 -i assets/overgrowth-background.mp4 -frames:v 1 background-frame.png
-cwebp -q 85 background-frame.png -o assets/overgrowth-background.webp
+cwebp -q 84 assets/greenhouse-night-original.png -o assets/greenhouse-night.webp
+ffmpeg -i assets/greenhouse-night-original.png -vf "scale=2304:1536,zoompan=z='1.015-0.015*cos(2*PI*on/240)':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=240:s=1440x960:fps=20,format=yuv420p" -an -c:v libx264 -preset slow -crf 25 -movflags +faststart assets/greenhouse-loop.mp4
 ```
 
-Fog, floating embers/spores, gently moving edge vines, and mouse parallax are rendered locally with CSS, SVG and canvas. They share the background video’s Play/Pause effects control and stop with reduced motion, data saver or a hidden tab. No animation framework is required.
+Fog, floating embers/spores, gently moving edge vines, coffee-cup steam, and mouse parallax are rendered locally with CSS, SVG and canvas. They share the background video’s Play/Pause effects control and stop with reduced motion, data saver or a hidden tab. No animation framework is required.

@@ -360,8 +360,11 @@ test("household page preserves stories, images and a route back to Halloween", a
 }) => {
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await expect(page.locator(".house-notes")).toHaveCount(0);
+  const menu = page.getByRole("button", { name: "Menu" });
+  if (await menu.isVisible()) await menu.click();
   await page
     .getByRole("navigation")
     .getByRole("link", { name: "Life at Pluto’s" })

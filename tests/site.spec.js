@@ -85,11 +85,11 @@ test("phone navigation supports touch, escape and destination focus", async ({
   await toggle.click();
   await page
     .getByRole("navigation")
-    .getByRole("link", { name: "Our little corner" })
+    .getByRole("link", { name: "Party details" })
     .click();
-  await expect(page).toHaveURL(/#about$/);
+  await expect(page).toHaveURL(/#party-details$/);
   await expect(page.getByRole("navigation")).toBeHidden();
-  await expect(page.locator("#about")).toBeFocused();
+  await expect(page.locator("#party-details")).toBeFocused();
   await page.setViewportSize({ width: 1440, height: 1000 });
   await expect(page.getByRole("navigation")).toBeVisible();
   await expect(toggle).toBeHidden();
@@ -167,10 +167,14 @@ test("page and navigation remain usable without JavaScript", async ({
   await expect(page.getByRole("navigation")).toBeVisible();
   await page
     .getByRole("navigation")
-    .getByRole("link", { name: "The regulars" })
+    .getByRole("link", { name: "Life at Pluto’s" })
     .click();
-  await expect(page).toHaveURL(/#residents$/);
+  await expect(page).toHaveURL(/life\.html$/);
   await expect(page.locator("#residents")).toBeVisible();
+  await page
+    .getByRole("navigation")
+    .getByRole("link", { name: /Halloween/ })
+    .click();
   await page.locator("summary").click();
   await expect(
     page.getByRole("link", { name: "Watch or download the invitation film" }),
@@ -348,4 +352,59 @@ test("fog and canvas effects pause together with the background", async ({
       ),
   );
   expect(await canvas.evaluate((el) => el.toDataURL())).toBe(still);
+});
+
+test("household page preserves stories, images and a route back to Halloween", async ({
+  page,
+  request,
+}) => {
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/");
+  await expect(page.locator(".house-notes")).toHaveCount(0);
+  await page
+    .getByRole("navigation")
+    .getByRole("link", { name: "Life at Pluto’s" })
+    .click();
+  await expect(page).toHaveURL(/life\.html$/);
+  await expect(page.locator("#tiaan-title")).toContainText("Tiaan");
+  await expect(page.locator("#pointy")).toContainText("snail poison");
+  await expect(page.locator(".appliance")).toContainText("Brand new");
+  for (const img of await page.locator("main img").all()) {
+    await img.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() => img.evaluate((el) => el.complete && el.naturalWidth > 0))
+      .toBeTruthy();
+  }
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth > innerWidth,
+      ),
+    ).toBe(false);
+  }
+  const anchors = await page
+    .locator('a[href^="#"]')
+    .evaluateAll((els) => els.map((el) => el.hash));
+  for (const anchor of anchors)
+    await expect(page.locator(anchor)).toHaveCount(1);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+    .analyze();
+  expect(results.violations).toEqual([]);
+  await page
+    .getByRole("link", { name: "Back to the Halloween invitation" })
+    .click();
+  await expect(page.locator("#invite")).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test("previously shared household links reach the moved feature", async ({
+  page,
+}) => {
+  await page.goto("/#appliance-title");
+  await expect(page).toHaveURL(/life\.html#appliance-title$/);
+  await expect(page.locator("#appliance-title")).toBeInViewport();
 });

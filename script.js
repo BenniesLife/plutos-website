@@ -27,7 +27,10 @@ if (toggle && navigation) {
     if (!link) return;
     closeMenu();
     // Move keyboard focus to the destination before hiding the mobile links.
-    const destination = document.querySelector(link.hash);
+    const destination =
+      link.pathname === location.pathname && link.hash
+        ? document.querySelector(link.hash)
+        : null;
     if (destination) {
       destination.setAttribute("tabindex", "-1");
       destination.focus({ preventScroll: true });
@@ -56,8 +59,10 @@ if (toggle && navigation) {
 // Some browsers ignore preload="none". Keep the source detached until opened.
 const film = document.querySelector(".invitation-film");
 const video = film?.querySelector("video");
-document.querySelector(".film-link")?.addEventListener("click", () => {
-  if (film) film.open = true;
+document.querySelectorAll(".film-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    if (film) film.open = true;
+  });
 });
 if (video) video.hidden = false;
 film?.addEventListener("toggle", () => {
@@ -141,4 +146,20 @@ if (background && motionToggle) {
   });
   document.addEventListener("visibilitychange", syncBackground);
   syncBackground();
+}
+
+// Preserve previously shared household links after moving their stories.
+if (location.pathname === "/" || location.pathname.endsWith("/index.html")) {
+  const householdAnchors = new Set([
+    "#residents",
+    "#bennie",
+    "#tiaan-title",
+    "#appliance-title",
+    "#pointy",
+    "#contenders-title",
+    "#bar",
+    "#drinks",
+  ]);
+  if (householdAnchors.has(location.hash))
+    location.replace("./life.html" + location.hash);
 }

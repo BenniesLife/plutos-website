@@ -6,6 +6,7 @@ await mkdir(output);
 // Keep the old image URLs working for existing links and cached versions of the page.
 for (const file of [
   "index.html",
+  "life.html",
   "styles.css",
   "script.js",
   "atmosphere.js",

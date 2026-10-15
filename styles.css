@@ -1801,3 +1801,85 @@ h3 {
     background: white !important;
   }
 }
+
+/* Keep the invitation primary; the household has its own home. */
+.party-details {
+  padding-block: 64px;
+  border-top: 1px solid var(--line);
+}
+.party-details h2,
+.life-teaser h2 {
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.05;
+  margin: 18px 0 30px;
+}
+.party-details h2 em,
+.life-teaser h2 em,
+.life-heading h1 em {
+  font-weight: 400;
+}
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px;
+}
+.party-grid h3 {
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 14px;
+}
+.party-grid p,
+.life-teaser p,
+.life-heading > p:last-child {
+  color: #c8c4b1;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.party-grid .text-link {
+  display: inline-block;
+  margin-top: 15px;
+}
+.life-teaser {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  padding-block: 55px;
+  border-top: 1px solid var(--line);
+}
+.life-teaser p + p {
+  margin-top: 15px;
+}
+.life-teaser .button {
+  margin-top: 24px;
+}
+.life-heading {
+  padding-top: 70px;
+  padding-bottom: 45px;
+}
+.life-heading .eyebrow {
+  margin-top: 35px;
+}
+.life-heading h1 {
+  font-size: clamp(60px, 8vw, 110px);
+  line-height: 0.95;
+  margin: 24px 0;
+}
+@media (max-width: 700px) {
+  .party-grid,
+  .life-teaser {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .party-details {
+    padding-block: 40px;
+  }
+  .life-teaser {
+    padding-block: 40px;
+  }
+  .life-teaser h2 {
+    margin-bottom: 0;
+  }
+  .life-heading {
+    padding-top: 35px;
+  }
+}

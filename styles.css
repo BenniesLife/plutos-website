@@ -928,7 +928,8 @@ h3 {
   margin-top: 12px;
   border-top: 1px solid var(--line);
 }
-.coffee-emblem {
+.coffee-emblem,
+.dishwasher-emblem {
   display: block;
   width: 94px;
   margin: 25px 0;

@@ -956,6 +956,44 @@ h3 {
   border-left: 1px solid var(--line);
   padding-left: 30px;
 }
+.appliance-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 24px 0;
+  border-radius: 5px;
+}
+.appliance-contenders {
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.appliance-contenders h4 {
+  margin: 0 0 16px;
+  color: #dbc7a3;
+  font-size: 18px;
+  font-weight: 400;
+}
+.contender-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.contender-grid figure {
+  margin: 0;
+}
+.contender-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.contender-grid figcaption {
+  margin-top: 9px;
+  color: #c8c4b1;
+  font-size: 11px;
+  line-height: 1.6;
+}
 .appliance h3 {
   font-size: 31px;
 }

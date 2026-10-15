@@ -1,14 +1,14 @@
 :root {
-  --forest: #0b100e;
-  --forest-deep: #070b09;
-  --cream: #f0e5ce;
-  --paper: #dfd0af;
-  --ink: #ece2cf;
-  --muted: #b6b8ac;
-  --rust: #d29970;
-  --line: #b8a37d30;
-  --light-line: #b8a37d30;
-  --display: "Cormorant Garamond", Georgia, serif;
+  --forest: #191c19;
+  --forest-deep: #141614;
+  --cream: #f0eee5;
+  --paper: #dedbd0;
+  --ink: #f0eee5;
+  --muted: #bfc0b8;
+  --rust: #b7bba4;
+  --line: #d9d9c929;
+  --light-line: #d9d9c929;
+  --display: "Libre Caslon Display", Georgia, serif;
   --sans: "DM Sans", Arial, sans-serif;
 }
 * {
@@ -1881,5 +1881,223 @@ h3 {
   }
   .life-heading {
     padding-top: 35px;
+  }
+}
+
+/* Editorial finish: neutral ink, uncoated-paper tones, restrained accents. */
+::selection {
+  background: #d5d8c5;
+  color: #191c19;
+}
+.site-header {
+  background: #141614eb;
+  border-color: var(--line);
+}
+.header-logo {
+  width: auto;
+  font-size: 39px;
+  font-weight: 400;
+}
+.header-logo span {
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.eyebrow,
+.ticket-top {
+  color: #b7bba4;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+}
+.ticket-top {
+  font-size: 10px;
+}
+.ticket-top > span:last-child {
+  display: none;
+}
+.site-header nav a,
+.site-header nav .nav-invite {
+  color: #dedfd5;
+}
+.site-header nav a:hover,
+.text-link:hover {
+  color: #fffdf5;
+}
+.site-header nav .nav-invite {
+  border-color: #d9d9c94d;
+  background: transparent;
+}
+.button {
+  border-radius: 0;
+  border-color: #d7d9cc;
+  font-weight: 500;
+  box-shadow: none;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.button-light {
+  background: #e2e3d8;
+  color: #171b17;
+  box-shadow: none;
+}
+.button-light:hover {
+  background: #f6f5ec;
+  transform: none;
+  box-shadow: none;
+}
+.button-outline {
+  color: #e2e3d8;
+  border-color: #888e7b;
+  background: transparent;
+}
+.button-outline:hover {
+  background: #262c25;
+}
+.button span {
+  font-size: 18px;
+}
+.text-link {
+  border-color: #9da28f80;
+  font-size: 13px;
+}
+.invitation::before {
+  background: linear-gradient(90deg, #141614f5, #141614d9);
+}
+.about::before,
+.household::before {
+  background: #141614f7;
+}
+.invitation-poster > a {
+  padding: 0;
+  border: 1px solid #d9d9c933;
+  background: #191c19;
+  box-shadow: none;
+}
+.invitation-poster figcaption,
+.invitation-poster figcaption span {
+  color: #b7baad;
+  font-size: 10px;
+}
+.invitation-card {
+  border-top-color: #d9d9c94d;
+}
+.invitation-card h1 {
+  letter-spacing: -1.5px;
+  line-height: 1.02;
+}
+.title-prelude {
+  font-style: normal;
+}
+.invitation-card .hero-intro {
+  color: #c7c9bd;
+  font: 400 16px/1.6 var(--sans);
+  letter-spacing: 0;
+}
+.invitation-card dt {
+  color: #b7baad;
+  font-size: 12px;
+}
+.invitation-card dd {
+  font-size: 14px;
+}
+.ticket-directions {
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+.invitation-copy > p {
+  color: #c7c9c0;
+  font-size: 16px;
+  line-height: 1.85;
+  max-width: 48ch;
+}
+.invitation-film summary,
+.film-duration,
+.film-content p {
+  color: #c7c9c0;
+}
+.play-icon {
+  border-color: #929985;
+  color: #dedfd5;
+}
+.invitation-film {
+  border-color: var(--line);
+}
+.party-details h2,
+.life-teaser h2 {
+  font-size: clamp(38px, 4vw, 58px);
+  letter-spacing: -0.6px;
+}
+.party-grid h3 {
+  font-size: 27px;
+  font-weight: 400;
+}
+.party-grid p,
+.life-teaser p {
+  color: #c7c9c0;
+  font-size: 16px;
+}
+.life-teaser .text-link {
+  margin-top: 22px;
+}
+.closing {
+  background: #1b201b;
+  border-color: var(--line);
+}
+.closing-inner {
+  padding-block: 70px;
+}
+.closing h2 {
+  font-size: clamp(45px, 6vw, 78px);
+  letter-spacing: -1px;
+}
+.site-footer::before {
+  background: #111410;
+}
+.site-footer p,
+.footer-fineprint,
+.closing p:last-of-type {
+  color: #b7baad;
+}
+.footer-wordmark span {
+  letter-spacing: 1.3px;
+}
+.fog {
+  opacity: 0.12;
+}
+.fog-far {
+  opacity: 0.06;
+}
+#spore-field {
+  opacity: 0.25;
+}
+.edge-vines {
+  opacity: 0.08;
+}
+@media (max-width: 700px) {
+  .header-logo {
+    width: auto;
+    font-size: 30px;
+  }
+  .header-logo span {
+    font-size: 6px;
+    letter-spacing: 1px;
+    margin-top: 5px;
+  }
+  .ticket-top {
+    font-size: 9px;
+  }
+  .invitation-card dd {
+    font-size: 14px;
+  }
+  .invitation-copy > p {
+    font-size: 15px;
+  }
+  .closing-inner {
+    padding-block: 48px;
+  }
+  .closing h2 {
+    font-size: 46px;
   }
 }
